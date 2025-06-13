@@ -140,7 +140,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
   function getEmojiForPersona(persona: any): string {
     const role = persona.role.toLowerCase()
 
-    if (role.includes("wellness") || role.includes("coach")) return "🧘‍♀️"
+    if (role.includes("wellness") || role.includes("coach")) return "🦫"  // Changed to capybara emoji
     if (role.includes("therapist") || role.includes("counselor")) return "👩‍⚕️"
     if (role.includes("hiring") || role.includes("manager")) return "👩‍💼"
     if (role.includes("technical") || role.includes("tech")) return "👨‍💻"
@@ -151,7 +151,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
     if (role.includes("student") && persona.name.toLowerCase().includes("maya")) return "👧🏾"
     if (role.includes("student")) return Math.random() > 0.5 ? "👨‍🎓" : "👩‍🎓"
     if (role.includes("environmental")) return "👨‍🌾"
-    if (role.includes("practical")) return "🧠"
+    if (role.includes("practical")) return "👩" // Changed from 🧑 to 👩
     if (role.includes("marketing")) return "👩‍💼"
     if (role.includes("developer")) return "👨‍💻"
     if (role.includes("mom") || role.includes("mother")) return "👩‍👧‍👦"

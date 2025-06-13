@@ -114,7 +114,7 @@ const groupScenarios = [
     personas: [
       {
         id: "teacher",
-        name: "Ms. Johnson",
+        name: "Ms. Thompson",
         role: "Teacher",
         personality:
           "Encouraging teacher who facilitates discussions and asks thought-provoking questions about environmental issues",
@@ -340,11 +340,14 @@ export default function HomePage() {
                       <div className="flex flex-col gap-2">
                         {scenario.personas.map((persona) => (
                           <div key={persona.id} className="flex items-center gap-2 text-sm">
-                            <img
-                              src={persona.avatar || "/placeholder.svg"}
-                              alt={persona.name}
-                              className="w-7 h-7 rounded-full border-2 border-purple-200 object-cover"
-                            />
+                            <span className="text-2xl" role="img" aria-label="persona">
+                              {persona.role === "Teacher" ? "👩‍🏫" :
+                               persona.role === "Wellness Coach" ? "👨‍⚕️" :
+                               persona.role === "Parent" ? "👨‍👩‍👧‍👦" :
+                               persona.role === "Social Organizer" ? "🤝" :
+                               persona.role === "Hiring Manager" ? "👔" :
+                               "👤"}
+                            </span>
                             <span className="font-medium text-purple-800">{persona.name}</span>
                             <span className="text-purple-600">({persona.role})</span>
                           </div>
