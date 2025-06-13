@@ -179,14 +179,14 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
       teacher: { rate: 1.0, pitch: 0.9, volume: 0.9, voiceName: "female", preferredVoiceIndex: 0 },
       manager: { rate: 1.0, pitch: 0.95, volume: 0.85, voiceName: "male", preferredVoiceIndex: 1 },
       student: { rate: 1.0, pitch: 1.15, volume: 0.9, voiceName: "female", preferredVoiceIndex: 2 },
-      classmate: { rate: 0.8, pitch: 1.0, volume: 0.9, voiceName: "male", preferredVoiceIndex: 3 },
-      parent: { rate: 0.65, pitch: 1.1, volume: 0.9, voiceName: "female", preferredVoiceIndex: 0 },
+      classmate: { rate: 1.0, pitch: 1.0, volume: 0.9, voiceName: "male", preferredVoiceIndex: 3 },
+      parent: { rate: 1.0, pitch: 1.1, volume: 0.9, voiceName: "female", preferredVoiceIndex: 0 },
       mom: { rate: 1.0, pitch: 1.2, volume: 0.9, voiceName: "female", preferredVoiceIndex: 0 },
-      dad: { rate: 0.8, pitch: 0.85, volume: 0.85, voiceName: "male", preferredVoiceIndex: 1 },
-      marketing: { rate: 0.75, pitch: 1.1, volume: 0.9, voiceName: "female", preferredVoiceIndex: 2 },
-      developer: { rate: 0.7, pitch: 0.9, volume: 0.85, voiceName: "male", preferredVoiceIndex: 3 },
-      friend: { rate: 0.8, pitch: 1.05, volume: 0.9, voiceName: "female", preferredVoiceIndex: 2 },
-      sibling: { rate: 0.85, pitch: 1.0, volume: 0.9, voiceName: "male", preferredVoiceIndex: 3 },
+      dad: { rate: 1.0, pitch: 0.85, volume: 0.85, voiceName: "male", preferredVoiceIndex: 1 },
+      marketing: { rate: 1.0, pitch: 1.1, volume: 0.9, voiceName: "female", preferredVoiceIndex: 2 },
+      developer: { rate: 1.0, pitch: 0.9, volume: 0.85, voiceName: "male", preferredVoiceIndex: 3 },
+      friend: { rate: 1.0, pitch: 1.05, volume: 0.9, voiceName: "female", preferredVoiceIndex: 2 },
+      sibling: { rate: 1.0, pitch: 1.0, volume: 0.9, voiceName: "male", preferredVoiceIndex: 3 },
     }
 
     const roleKey = persona.role.toLowerCase().split(" ")[0]
