@@ -643,7 +643,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
             </Badge>
             {!isSinglePersonaScenario && (
               <Button
-                variant={isGroupActive ? "destructive" : "green"}
+                variant={isGroupActive ? "destructive" : "custom-green"}
                 onClick={isGroupActive ? pauseGroupDiscussion : startGroupDiscussion}
               >
                 {isGroupActive ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
@@ -651,7 +651,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
               </Button>
             )}
             {isSinglePersonaScenario && (
-              <Button onClick={startGroupDiscussion} variant="green" disabled={messages.length > 0}>
+              <Button onClick={startGroupDiscussion} variant="custom-green" disabled={messages.length > 0}>
                 <Heart className="h-4 w-4 mr-2" />
                 {messages.length > 0 ? "Session Active" : "Start Session"}
               </Button>
@@ -934,9 +934,9 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    variant="custom-green"
                     disabled={isLoading || !input.trim()}
-                    variant="default"
+                    className="disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Send message"
                   >
                     Send
@@ -950,3 +950,4 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
     </div>
   )
 }
+

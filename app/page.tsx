@@ -249,7 +249,7 @@ export default function HomePage() {
           </div>
           <p className="text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
             Practice conversations in realistic social settings. From group discussions to personal wellness chats and
-            job interviews - build confidence with our friendly capybara companions! 🌟
+            job interviews - build confidence with our friendly capybara companion! 🌟
           </p>
         </div>
 
@@ -342,19 +342,30 @@ export default function HomePage() {
                           <div key={persona.id} className="flex items-center gap-2 text-sm">
                             <span className="text-2xl" role="img" aria-label="persona">
                               {persona.role === "Teacher" ? "👩‍🏫" :
-                               persona.role === "Wellness Coach" ? "👨‍⚕️" :
-                               persona.role === "Parent" ? "👨‍👩‍👧‍👦" :
-                               persona.role === "Social Organizer" ? "🤝" :
-                               persona.role === "Hiring Manager" ? "👔" :
-                               "👤"}
+                              persona.role === "Wellness Coach" ? "🦫" :
+                              persona.role === "Parent" ? "👨‍👩‍👧‍👦" :
+                              persona.role === "Social Organizer" ? "🤝" :
+                              persona.role === "Hiring Manager" ? "👔" :
+                              persona.role === "Project Manager" ? "🗂️" :
+                              persona.role === "Lead Developer" ? "👨‍💻" :
+                              persona.role === "Technical Lead" ? "🧑‍💻" :
+                              persona.role === "Environmental Enthusiast" ? "🌿" :
+                              persona.role === "HR Representative" ? "🧑‍💼" :
+                              persona.role === "Marketing Specialist" ? "📣" :
+                              persona.role === "Trendy Friend" ? "🕶️" :
+                              persona.role === "Chill Friend" ? "🧘‍♂️" :
+                              persona.role === "Sibling" ? "🧒" :
+                              persona.role === "Practical Thinker" ? "💁‍♀️" :
+                              "👤"}
                             </span>
+
                             <span className="font-medium text-purple-800">{persona.name}</span>
                             <span className="text-purple-600">({persona.role})</span>
                           </div>
                         ))}
                       </div>
                     </div>
-                    <Button className="w-full mt-4 shadow-lg hover:shadow-xl transition-all duration-300 bg-purple-600 hover:bg-purple-700 text-white">
+                    <Button className="w-full mt-4 shadow-lg hover:shadow-xl transition-all duration-300" variant="custom-green">
                       Start
                     </Button>
                   </CardContent>

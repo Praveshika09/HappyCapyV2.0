@@ -7,8 +7,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "HappyCapy Social Simulation",
-  description: "Practice social interactions in a safe, AI-powered environment",
-    generator: 'v0.dev'
+  description: "Practice social interactions in a safe, AI-powered environment"
 }
 
 export default function RootLayout({
@@ -17,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
