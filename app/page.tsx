@@ -230,31 +230,31 @@ export default function HomePage() {
         <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-pink-300 rounded-full opacity-25 animate-bounce"></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto p-4">
-        {/* Header with Capybara Logo as main element */}
-        <div className="text-center mb-12 pt-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header with Capybara Logo */}
+        <div className="text-center mb-8 sm:mb-16 pt-6 sm:pt-12">
           <div className="flex flex-col items-center justify-center gap-4 mb-6">
             <CapybaraLogo 
               size="xl" 
               animated={true}
-              className="w-32 h-32"
+              className="w-24 h-24 sm:w-32 sm:h-32"
               usePng={true}
             />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               HappyCapy
             </h1>
             <div className="flex items-center justify-center gap-2 mt-2">
-              <span className="text-lg font-medium text-purple-700">Social Simulation Platform</span>
+              <span className="text-base sm:text-lg font-medium text-purple-700">Social Simulation Platform</span>
             </div>
           </div>
-          <p className="text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed px-4">
             Practice conversations in realistic social settings. From group discussions to personal wellness chats and
             job interviews - build confidence with our friendly capybara companion! 🌟
           </p>
         </div>
 
         {/* Features */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Card className="bg-white/80 backdrop-blur-sm border-purple-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="flex items-center gap-3">
@@ -300,11 +300,11 @@ export default function HomePage() {
 
         {/* Group Scenarios */}
         <div className="mb-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-purple-800 mb-4">Choose Your Conversation Practice</h2>
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-purple-800 mb-4">Choose Your Conversation Practice</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {groupScenarios.map((scenario) => {
               const IconComponent = scenario.icon
               return (

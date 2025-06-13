@@ -31,7 +31,7 @@ export default function EmojiCharacter({ persona, isActive, isSpeaking, position
     >
       <div
         className={cn(
-          "relative w-20 h-20 rounded-full flex items-center justify-center text-5xl transition-all duration-300",
+          "relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-4xl sm:text-5xl transition-all duration-300",
           isActive ? "ring-4 ring-pink-500 scale-110 shadow-lg" : "ring-2 ring-purple-300",
           isSpeaking ? "animate-pulse bg-gradient-to-br from-pink-100 to-purple-100" : "bg-white/80 backdrop-blur-sm",
         )}
@@ -46,8 +46,8 @@ export default function EmojiCharacter({ persona, isActive, isSpeaking, position
         )}
       </div>
       <div className="mt-2 text-center">
-        <div className="text-sm font-medium text-purple-800">{persona.name}</div>
-        <div className="text-xs text-gray-600">{persona.role}</div>
+        <div className="text-xs sm:text-sm font-medium text-purple-800">{persona.name}</div>
+        <div className="text-[10px] sm:text-xs text-gray-600">{persona.role}</div>
       </div>
     </div>
   )

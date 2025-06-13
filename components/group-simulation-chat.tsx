@@ -20,6 +20,10 @@ import {
   Info,
   Heart,
   UserCheck,
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react"
 import PerformanceReport from "@/components/performance-report"
 import FeedbackPanel from "@/components/feedback-panel"
@@ -73,6 +77,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
   const [isGroupActive, setIsGroupActive] = useState(false)
   const [currentSpeaker, setCurrentSpeaker] = useState<string | null>(null)
   const [hasStartedChatting, setHasStartedChatting] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   const [sessionStats, setSessionStats] = useState({
     totalMessages: 0,
@@ -608,346 +613,345 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-pink-100 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-purple-200 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-pink-200 rounded-full opacity-30 animate-bounce"></div>
-        <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-purple-300 rounded-full opacity-15 animate-pulse"></div>
-        <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-pink-300 rounded-full opacity-25 animate-bounce"></div>
-      </div>
+      {/* Add a scaling container for mobile */}
+      <div className="md:transform-none transform scale-[0.85] sm:scale-90 origin-top min-h-screen">
+        {/* ...existing background code... */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-emerald-50" />
-      <div className="absolute inset-0 bg-black/20" />
+        <div className="relative z-20 bg-white/90 backdrop-blur-sm border-b border-purple-200 p-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-2 md:gap-4 flex-wrap">
+              {/* Adjust button and text sizes */}
+              <Button variant="ghost" onClick={onBack} className="hover:bg-purple-100 text-xs md:text-sm">
+                <ArrowLeft className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
+                Back
+              </Button>
+              <CapybaraLogo size="sm" animated={true} />
+              <div>
+                <h1 className="text-xl font-bold text-purple-800">{scenario.title}</h1>
+                <p className="text-sm text-purple-600">
+                  {isSinglePersonaScenario
+                    ? `Session with ${enhancedScenario.personas[0].name}`
+                    : `Theme: ${scenario.theme}`}
+                </p>
+              </div>
+            </div>
 
-      <div className="relative z-20 bg-white/90 backdrop-blur-sm border-b border-purple-200 p-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" onClick={onBack} className="hover:bg-purple-100">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
-            <CapybaraLogo size="sm" animated={true} />
-            <div>
-              <h1 className="text-xl font-bold text-purple-800">{scenario.title}</h1>
-              <p className="text-sm text-purple-600">
-                {isSinglePersonaScenario
-                  ? `Session with ${enhancedScenario.personas[0].name}`
-                  : `Theme: ${scenario.theme}`}
-              </p>
+            {/* Modify the header section for responsive buttons */}
+            <div className="flex items-center gap-2">
+              <Badge className="hidden sm:flex bg-purple-100 text-purple-700 border-purple-200">
+                <MessageSquare className="h-3 w-3 mr-1" />
+                {messages.length} messages
+              </Badge>
+              {/* Mobile only message count */}
+              <Badge className="sm:hidden bg-purple-100 text-purple-700 border-purple-200">
+                <MessageSquare className="h-3 w-3" />
+                {messages.length}
+              </Badge>
+              
+              {!isSinglePersonaScenario && (
+                <Button
+                  variant={isGroupActive ? "destructive" : "custom-green"}
+                  onClick={isGroupActive ? pauseGroupDiscussion : startGroupDiscussion}
+                  className="text-xs sm:text-sm"
+                >
+                  {isGroupActive ? <Pause className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" /> : <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />}
+                  <span className="hidden sm:inline">{isGroupActive ? "Pause Discussion" : "Start Discussion"}</span>
+                  <span className="sm:hidden">{isGroupActive ? "Pause" : "Start"}</span>
+                </Button>
+              )}
+              {isSinglePersonaScenario && (
+                <Button 
+                  onClick={startGroupDiscussion} 
+                  variant="custom-green" 
+                  disabled={messages.length > 0}
+                  className="text-xs sm:text-sm"
+                >
+                  <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">{messages.length > 0 ? "Session Active" : "Start Session"}</span>
+                  <span className="sm:hidden">{messages.length > 0 ? "Active" : "Start"}</span>
+                </Button>
+              )}
+              <Button
+                variant="outline"
+                onClick={() => setShowReport(true)}
+                className="border-purple-200 hover:bg-purple-50 text-xs sm:text-sm"
+              >
+                <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">View Report</span>
+                <span className="sm:hidden">Report</span>
+              </Button>
             </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <Badge className="bg-purple-100 text-purple-700 border-purple-200">
-              <MessageSquare className="h-3 w-3 mr-1" />
-              {messages.length} messages
-            </Badge>
-            {!isSinglePersonaScenario && (
-              <Button
-                variant={isGroupActive ? "destructive" : "custom-green"}
-                onClick={isGroupActive ? pauseGroupDiscussion : startGroupDiscussion}
-              >
-                {isGroupActive ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
-                {isGroupActive ? "Pause Discussion" : "Start Discussion"}
-              </Button>
-            )}
-            {isSinglePersonaScenario && (
-              <Button onClick={startGroupDiscussion} variant="custom-green" disabled={messages.length > 0}>
-                <Heart className="h-4 w-4 mr-2" />
-                {messages.length > 0 ? "Session Active" : "Start Session"}
-              </Button>
-            )}
-            <Button
-              variant="outline"
-              onClick={() => setShowReport(true)}
-              className="border-purple-200 hover:bg-purple-50"
-            >
-              <BarChart3 className="h-4 w-4 mr-2" />
-              View Report
-            </Button>
-          </div>
         </div>
-      </div>
 
-      <div className="relative z-10 flex h-[calc(100vh-80px)]">
-        <div className="w-80 p-4 space-y-4 bg-white/80 backdrop-blur-sm border-r border-purple-200 overflow-y-auto">
-          <FeedbackPanel stats={sessionStats} lastMessage={lastUserMessage} hasStartedChatting={hasStartedChatting} />
+        <div className="relative z-10 flex flex-col md:flex-row h-[calc(100vh-80px)]">
+          {/* Make sidebar collapse on mobile */}
+          <div className="w-full md:w-80 p-2 md:p-4 space-y-4 bg-white/80 backdrop-blur-sm border-b md:border-r border-purple-200 overflow-y-auto">
+            <FeedbackPanel stats={sessionStats} lastMessage={lastUserMessage} hasStartedChatting={hasStartedChatting} />
 
-          {(!speechSupported || speechError || micPermission === "denied") && (
+            {/* Voice status card */}
+            {(!speechSupported || speechError || micPermission === "denied") && (
+              <Card className="border-purple-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-sm text-purple-800">
+                    <Info className="h-4 w-4" />
+                    Voice Input Status
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {!speechSupported && (
+                    <div className="text-sm text-amber-600">
+                      <p>Speech recognition not supported in this browser.</p>
+                      <p className="text-xs mt-1">Try Chrome, Edge, or Safari for voice input.</p>
+                    </div>
+                  )}
+                  {micPermission === "denied" && (
+                    <div className="text-sm text-red-600">
+                      <p>Microphone access denied.</p>
+                      <p className="text-xs mt-1">Enable microphone permissions in browser settings.</p>
+                    </div>
+                  )}
+                  {speechError && (
+                    <div className="text-sm text-red-600">
+                      <p>{speechError}</p>
+                      <Button size="sm" variant="outline" onClick={clearSpeechError} className="mt-2">
+                        Dismiss
+                      </Button>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Recent messages card */}
             <Card className="border-purple-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-sm text-purple-800">
-                  <Info className="h-4 w-4" />
-                  Voice Input Status
-                </CardTitle>
+                <CardTitle className="text-sm text-purple-800">Recent Messages</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                {!speechSupported && (
-                  <div className="text-sm text-amber-600">
-                    <p>Speech recognition not supported in this browser.</p>
-                    <p className="text-xs mt-1">Try Chrome, Edge, or Safari for voice input.</p>
-                  </div>
-                )}
-                {micPermission === "denied" && (
-                  <div className="text-sm text-red-600">
-                    <p>Microphone access denied.</p>
-                    <p className="text-xs mt-1">Enable microphone permissions in browser settings.</p>
-                  </div>
-                )}
-                {speechError && (
-                  <div className="text-sm text-red-600">
-                    <p>{speechError}</p>
-                    <Button size="sm" variant="outline" onClick={clearSpeechError} className="mt-2">
-                      Dismiss
-                    </Button>
-                  </div>
-                )}
+              <CardContent>
+                <div className="space-y-2 max-h-60 overflow-y-auto">
+                  {messages.length === 0 ? (
+                    <div className="text-center py-4">
+                      <p className="text-sm text-gray-500">No messages yet</p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {isSinglePersonaScenario
+                          ? "Start by sharing how you're feeling"
+                          : "Begin the conversation to see messages here"}
+                      </p>
+                    </div>
+                  ) : (
+                    messages.slice(-5).map((message, index) => {
+                      const speakerMatch = message.content.match(/^\*\*([^*]+)\*\*:/)
+                      const speakerName = speakerMatch ? speakerMatch[1] : "You"
+                      const messageContent = speakerMatch
+                        ? message.content.replace(/^\*\*[^*]+\*\*:\s*/, "")
+                        : message.content
+
+                      return (
+                        <div key={index} className="text-xs p-2 bg-purple-50 rounded border border-purple-100">
+                          <div className="font-medium text-purple-700">{speakerName}:</div>
+                          <div className="text-purple-600">{messageContent}</div>
+                        </div>
+                      )
+                    })
+                  )}
+                </div>
               </CardContent>
             </Card>
-          )}
-
-          <Card className="border-purple-200">
-            <CardHeader>
-              <CardTitle className="text-sm text-purple-800">Recent Messages</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2 max-h-60 overflow-y-auto">
-                {messages.length === 0 ? (
-                  <div className="text-center py-4">
-                    <p className="text-sm text-gray-500">No messages yet</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {isSinglePersonaScenario
-                        ? "Start by sharing how you're feeling"
-                        : "Begin the conversation to see messages here"}
-                    </p>
-                  </div>
-                ) : (
-                  messages.slice(-5).map((message, index) => {
-                    const speakerMatch = message.content.match(/^\*\*([^*]+)\*\*:/)
-                    const speakerName = speakerMatch ? speakerMatch[1] : "You"
-                    const messageContent = speakerMatch
-                      ? message.content.replace(/^\*\*[^*]+\*\*:\s*/, "")
-                      : message.content
-
-                    return (
-                      <div key={index} className="text-xs p-2 bg-purple-50 rounded border border-purple-100">
-                        <div className="font-medium text-purple-700">{speakerName}:</div>
-                        <div className="text-purple-600">{messageContent}</div>
-                      </div>
-                    )
-                  })
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="flex-1 relative">
-          <div className="absolute inset-0 p-8">
-            {isPersonalAssistant ? (
-              <div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  top: `${enhancedScenario.personas[0].position.y}%`,
-                  left: `${enhancedScenario.personas[0].position.x}%`,
-                }}
-              >
-                <CapybaraLogo
-                  size="xl"
-                  animated={currentSpeaker === enhancedScenario.personas[0].name && isSpeaking}
-                  className="drop-shadow-lg"
-                  usePng={true}
-                />
-                <div className="mt-2 text-center">
-                  <div className="text-lg font-medium text-purple-700">{enhancedScenario.personas[0].name}</div>
-                  <div className="text-sm text-gray-600">{enhancedScenario.personas[0].role}</div>
-                </div>
-                {currentSpeaker === enhancedScenario.personas[0].name && isSpeaking && (
-                  <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-48 speech-bubble">
-                    <div className="bg-white rounded-lg p-3 shadow-lg border relative">
-                      <div className="text-xs text-gray-700 leading-tight">💬 Speaking...</div>
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
-                        <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white" />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              enhancedScenario.personas.map((persona, index) => (
-                <EmojiCharacter
-                  key={persona.id}
-                  persona={persona}
-                  isActive={currentSpeaker === persona.name}
-                  isSpeaking={currentSpeaker === persona.name && isSpeaking}
-                  position={persona.position}
-                  seatPosition={index}
-                />
-              ))
-            )}
-
-            <div
-              className={`absolute ${isSinglePersonaScenario ? "bottom-8 left-1/2" : "bottom-8 left-1/2"} transform -translate-x-1/2`}
-            >
-              <div className="text-center">
-                <div
-                  className={`w-20 h-20 rounded-full border-4 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 ${isListening ? "border-pink-500 animate-pulse scale-110 shadow-lg" : "border-purple-500 shadow-md"
-                    }`}
-                >
-                  {isSinglePersonaScenario ? (
-                    <Heart className="h-8 w-8 text-purple-600" />
-                  ) : (
-                    <Users className="h-8 w-8 text-purple-600" />
-                  )}
-                </div>
-                <div className="mt-2 text-sm font-medium text-[hsl(var(--green-text))]">You</div>
-                {isListening && (
-                  <div className="mt-1 text-xs text-[hsl(var(--green-text))] animate-pulse flex items-center justify-center gap-1">
-                    🎤 Listening...
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {isLoading && (
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-purple-200">
-                  <div className="flex items-center gap-2 text-sm text-purple-600">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" />
-                    <div
-                      className="w-2 h-2 bg-pink-500 rounded-full animate-bounce"
-                      style={{ animationDelay: "0.1s" }}
-                    />
-                    <div
-                      className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
-                      style={{ animationDelay: "0.2s" }}
-                    />
-                    <span className="ml-2">
-                      {isSinglePersonaScenario ? "Listening and thinking..." : "Someone is thinking..."}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {(error || chatError) && (
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-96">
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2 text-red-600 mb-2">
-                    <AlertCircle className="h-4 w-4" />
-                    <span className="font-medium">Connection Error</span>
-                  </div>
-                  <p className="text-red-600 text-sm mb-3">
-                    {chatError || error?.message || "Failed to communicate with the AI. Please try again."}
-                  </p>
-                  <Button size="sm" variant="outline" onClick={retryChat}>
-                    Try Again
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {messages.length === 0 && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-purple-200 max-w-md">
-                  {isPersonalAssistant && (
-                    <>
-                      <Heart className="h-12 w-12 text-purple-500 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-purple-800 mb-2">Welcome to Your Safe Space</h3>
-                      <p className="text-purple-600 text-sm mb-4">
-                        This is a judgment-free zone where you can share your feelings and get support. Dr. Riley is
-                        here to listen and help you feel better.
-                      </p>
-                      <p className="text-purple-500 text-xs">
-                        💡 Try starting with: "I'm feeling..." or "Today has been..."
-                      </p>
-                    </>
-                  )}
-                  {isJobInterview && (
-                    <>
-                      <UserCheck className="h-12 w-12 text-purple-500 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-purple-800 mb-2">Job Interview Practice</h3>
-                      <p className="text-purple-600 text-sm mb-4">
-                        Practice your interview skills in a supportive environment. The interview panel will ask you
-                        questions about your experience and skills.
-                      </p>
-                      <p className="text-purple-500 text-xs">
-                        💡 Try starting with: "I'm ready for the interview" or "Hello, nice to meet you"
-                      </p>
-                    </>
-                  )}
-                  {!isSinglePersonaScenario && !isJobInterview && (
-                    <>
-                      <Users className="h-12 w-12 text-purple-500 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-purple-800 mb-2">Group Discussion</h3>
-                      <p className="text-purple-600 text-sm mb-4">
-                        Join the conversation about {scenario.theme}. Share your thoughts and engage with the group!
-                      </p>
-                      <p className="text-purple-500 text-xs">
-                        💡 Try starting the discussion or click "Start Discussion" above
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
 
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-4">
-            <Card className="border-purple-200 bg-white/90 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <form onSubmit={handleFormSubmit} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={input}
-                    onChange={handleInputChange}
-                    placeholder={isSinglePersonaScenario ? "Share how you're feeling..." : "Join the conversation..."}
-                    className="flex-1 px-4 py-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    disabled={isLoading}
+          {/* Adjust main content area */}
+          <div className="flex-1 relative">
+            <div className="absolute inset-0 p-8">
+              {isPersonalAssistant ? (
+                <div
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                  style={{
+                    top: `${enhancedScenario.personas[0].position.y}%`,
+                    left: `${enhancedScenario.personas[0].position.x}%`,
+                  }}
+                >
+                  <CapybaraLogo
+                    size="xl"
+                    animated={currentSpeaker === enhancedScenario.personas[0].name && isSpeaking}
+                    className="drop-shadow-lg"
+                    usePng={true}
                   />
-                  <Button
-                    type="button"
-                    variant={isListening ? "destructive" : "outline"}
-                    onClick={isListening ? stopListening : startListening}
-                    disabled={isLoading || !speechSupported}
-                    className={isListening ? "" : "border-purple-200 hover:bg-purple-50"}
-                    title={
-                      !speechSupported
-                        ? "Speech recognition not supported"
-                        : micPermission === "denied"
-                          ? "Microphone access denied"
-                          : isListening
-                            ? "Stop listening"
-                            : "Start voice input"
-                    }
+                  <div className="mt-2 text-center">
+                    <div className="text-lg font-medium text-purple-700">{enhancedScenario.personas[0].name}</div>
+                    <div className="text-sm text-gray-600">{enhancedScenario.personas[0].role}</div>
+                  </div>
+                  {currentSpeaker === enhancedScenario.personas[0].name && isSpeaking && (
+                    <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-48 speech-bubble">
+                      <div className="bg-white rounded-lg p-3 shadow-lg border relative">
+                        <div className="text-xs text-gray-700 leading-tight">💬 Speaking...</div>
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
+                          <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                enhancedScenario.personas.map((persona, index) => (
+                  <EmojiCharacter
+                    key={persona.id}
+                    persona={persona}
+                    isActive={currentSpeaker === persona.name}
+                    isSpeaking={currentSpeaker === persona.name && isSpeaking}
+                    position={persona.position}
+                    seatPosition={index}
+                  />
+                ))
+              )}
+
+              <div
+                className={`absolute ${isSinglePersonaScenario ? "bottom-8 left-1/2" : "bottom-8 left-1/2"} transform -translate-x-1/2`}
+              >
+                <div className="text-center">
+                  <div
+                    className={`w-20 h-20 rounded-full border-4 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center transition-all duration-300 ${isListening ? "border-pink-500 animate-pulse scale-110 shadow-lg" : "border-purple-500 shadow-md"
+                      }`}
                   >
-                    {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={isSpeaking ? stopSpeaking : () => { }}
-                    disabled={!isSpeaking}
-                    className="border-purple-200 hover:bg-purple-50"
-                    title={isSpeaking ? "Stop speaking" : "Text-to-speech"}
-                  >
-                    {isSpeaking ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="custom-green"
-                    disabled={isLoading || !input.trim()}
-                    className="disabled:opacity-50 disabled:cursor-not-allowed"
-                    title="Send message"
-                  >
-                    Send
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    {isSinglePersonaScenario ? (
+                      <Heart className="h-8 w-8 text-purple-600" />
+                    ) : (
+                      <Users className="h-8 w-8 text-purple-600" />
+                    )}
+                  </div>
+                  <div className="mt-2 text-sm font-medium text-[hsl(var(--green-text))]">You</div>
+                  {isListening && (
+                    <div className="mt-1 text-xs text-[hsl(var(--green-text))] animate-pulse flex items-center justify-center gap-1">
+                      🎤 Listening...
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {isLoading && (
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-purple-200">
+                    <div className="flex items-center gap-2 text-sm text-purple-600">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" />
+                      <div
+                        className="w-2 h-2 bg-pink-500 rounded-full animate-bounce"
+                        style={{ animationDelay: "0.1s" }}
+                      />
+                      <div
+                        className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                      />
+                      <span className="ml-2">
+                        {isSinglePersonaScenario ? "Listening and thinking..." : "Someone is thinking..."}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {(error || chatError) && (
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-96">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2 text-red-600 mb-2">
+                      <AlertCircle className="h-4 w-4" />
+                      <span className="font-medium">Connection Error</span>
+                    </div>
+                    <p className="text-red-600 text-sm mb-3">
+                      {chatError || error?.message || "Failed to communicate with the AI. Please try again."}
+                    </p>
+                    <Button size="sm" variant="outline" onClick={retryChat}>
+                      Try Again
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {messages.length === 0 && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-purple-200 max-w-md">
+                    {isPersonalAssistant && (
+                      <>
+                        <Heart className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold text-purple-800 mb-2">Welcome to Your Safe Space</h3>
+                        <p className="text-purple-600 text-sm mb-4">
+                          This is a judgment-free zone where you can share your feelings and get support. Dr. Riley is
+                          here to listen and help you feel better.
+                        </p>
+                        <p className="text-purple-500 text-xs">
+                          💡 Try starting with: "I'm feeling..." or "Today has been..."
+                        </p>
+                      </>
+                    )}
+                    {isJobInterview && (
+                      <>
+                        <UserCheck className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold text-purple-800 mb-2">Job Interview Practice</h3>
+                        <p className="text-purple-600 text-sm mb-4">
+                          Practice your interview skills in a supportive environment. The interview panel will ask you
+                          questions about your experience and skills.
+                        </p>
+                        <p className="text-purple-500 text-xs">
+                          💡 Try starting with: "I'm ready for the interview" or "Hello, nice to meet you"
+                        </p>
+                      </>
+                    )}
+                    {!isSinglePersonaScenario && !isJobInterview && (
+                      <>
+                        <Users className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold text-purple-800 mb-2">Group Discussion</h3>
+                        <p className="text-purple-600 text-sm mb-4">
+                          Join the conversation about {scenario.theme}. Share your thoughts and engage with the group!
+                        </p>
+                        <p className="text-purple-500 text-xs">
+                          💡 Try starting the discussion or click "Start Discussion" above
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Adjust input area for mobile */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-2 md:px-4">
+              <Card className="border-purple-200 bg-white/90 backdrop-blur-sm">
+                <CardContent className="p-2 md:p-4">
+                  <form onSubmit={handleFormSubmit} className="flex gap-1 md:gap-2">
+                    <input
+                      type="text"
+                      value={input}
+                      onChange={handleInputChange}
+                      placeholder={isSinglePersonaScenario ? "Share how you're feeling..." : "Join the conversation..."}
+                      className="flex-1 px-4 py-3 md:py-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      disabled={isLoading}
+                    />
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant={isListening ? "destructive" : "outline"}
+                        onClick={isListening ? stopListening : startListening}
+                        disabled={isLoading || !speechSupported}
+                        className={`${isListening ? "" : "border-purple-200 hover:bg-purple-50"} h-12 sm:h-10 flex-1`}
+                      >
+                        {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                      </Button>
+                      <Button
+                        type="submit"
+                        variant="custom-green"
+                        disabled={isLoading || !input.trim()}
+                        className="disabled:opacity-50 disabled:cursor-not-allowed h-12 sm:h-10 flex-1"
+                        title="Send message"
+                      >
+                        Send
+                      </Button>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
