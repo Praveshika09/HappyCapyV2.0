@@ -76,7 +76,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
 
   const [sessionStats, setSessionStats] = useState({
     totalMessages: 0,
-    averageResponseTime: 0,
+    averageResponseTime: 3,
     fillerWords: 0,
     pauseCount: 0,
     confidenceScore: 0,
@@ -755,6 +755,7 @@ export default function GroupSimulationChat({ scenario, onBack }: GroupSimulatio
                   size="xl"
                   animated={currentSpeaker === enhancedScenario.personas[0].name && isSpeaking}
                   className="drop-shadow-lg"
+                  usePng={true}
                 />
                 <div className="mt-2 text-center">
                   <div className="text-lg font-medium text-purple-700">{enhancedScenario.personas[0].name}</div>

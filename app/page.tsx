@@ -234,14 +234,17 @@ export default function HomePage() {
         {/* Header with Capybara Logo as main element */}
         <div className="text-center mb-12 pt-8">
           <div className="flex flex-col items-center justify-center gap-4 mb-6">
-            <CapybaraLogo size="xl" animated={true} />
+            <CapybaraLogo 
+              size="xl" 
+              animated={true}
+              className="w-32 h-32"
+              usePng={true}
+            />
             <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               HappyCapy
             </h1>
             <div className="flex items-center justify-center gap-2 mt-2">
-              <Sparkles className="h-5 w-5 text-purple-500" />
               <span className="text-lg font-medium text-purple-700">Social Simulation Platform</span>
-              <Sparkles className="h-5 w-5 text-purple-500" />
             </div>
           </div>
           <p className="text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
@@ -361,9 +364,9 @@ export default function HomePage() {
         {/* Footer with Capybara */}
         <div className="text-center py-8">
           <div className="flex items-center justify-center gap-2 text-purple-600">
-            <CapybaraLogo size="sm" animated={true} />
+            <CapybaraLogo size="sm" animated={true} usePng={true} />
             <span className="text-sm">Made with 💜 for better social connections</span>
-            <CapybaraLogo size="sm" animated={true} />
+            <CapybaraLogo size="sm" animated={true} usePng={true} />
           </div>
         </div>
       </div>
@@ -371,3 +374,4 @@ export default function HomePage() {
     </>
   )
 }
+
