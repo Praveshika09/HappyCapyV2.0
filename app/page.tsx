@@ -302,11 +302,6 @@ export default function HomePage() {
         <div className="mb-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-purple-800 mb-4">Choose Your Conversation Practice</h2>
-            <div className="flex items-center justify-center gap-2">
-              <CapybaraLogo size="sm" animated={true} />
-              <p className="text-purple-600">Select a scenario to start building your communication skills!</p>
-              <CapybaraLogo size="sm" animated={true} />
-            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
