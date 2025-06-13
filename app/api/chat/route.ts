@@ -43,7 +43,7 @@ Instructions:
 - Ask follow-up questions to keep the conversation flowing
 - Adapt your language and tone to match your role
 
-Remember: You are helping a teenager practice social interactions in a safe environment. Be realistic but supportive.`
+Remember: You are helping a teenager practice social interactions in a safe environment. Be realistic, supportive. say positive things`
 
     console.log("Creating stream with system prompt for:", persona.name)
 

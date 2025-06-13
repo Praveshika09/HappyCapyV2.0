@@ -55,7 +55,7 @@ INSTRUCTIONS:
 - Encourage the user to participate by asking their opinion
 - Create realistic group dynamics with occasional disagreements or different viewpoints
 
-Remember: This is helping someone practice group conversation skills, so make it realistic but supportive.`
+Remember: This is helping someone practice group conversation skills, so make it realistic but supportive, positive.`
 
     console.log("Creating group conversation stream")
 
