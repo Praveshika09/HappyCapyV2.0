@@ -57,3 +57,5 @@ Deployment: Vercel Edge Runtime
 
 HappyCapy represents a significant advancement in AI-assisted social skills development, combining cutting-edge technology with compassionate design to create a supportive environment for personal growth.
 
+Product Demo: https://happy-capy-v2-0.vercel.app/ 
+
