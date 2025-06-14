@@ -1,30 +1,60 @@
-# HappyCapy Web Module
+# 🦫 HappyCapy - AI-Powered Social Skills Development Platform
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-green?style=flat&logo=google&logoColor=white)](https://cloud.google.com/gemini)
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/praveshika09-9263s-projects/v0-happy-capy-web-module)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/1KqYRxwhABm)
+HappyCapy is an innovative social skills development platform that leverages advanced AI technology to create immersive, real-time conversation simulations for improving social confidence and communication abilities.
 
-## Overview
+## 🌟 Key Features
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- **Multi-Persona AI Conversations**: Dynamic group discussions with multiple AI personas, each with unique personalities and conversation styles
+- **Real-Time Speech Recognition**: Natural voice interactions with advanced speech-to-text capabilities
+- **Adaptive Text-to-Speech**: Persona-specific voice modulation for immersive conversations
+- **Live Performance Analytics**: Real-time feedback on confidence, engagement, and coherence metrics
+- **Anxiety-Aware Responses**: Intelligent detection of anxiety markers with supportive feedback
+- **Responsive Design**: Seamlessly adapts to any device or screen size
 
-## Deployment
+## 🚀 Technical Highlights
 
-Your project is live at:
+- Built with Next.js 15 and TypeScript for robust type safety and modern development practices
+- Implements Google's Gemini 1.5 Flash for sophisticated natural language processing
+- Custom-built TTS service with voice parameter control for persona-specific speech
+- Real-time analytics engine for conversation quality assessment
+- Tailwind CSS with custom animations and responsive design
+- Shadcn UI components for consistent and accessible interface
+- WebSpeech API integration for voice input/output
 
-**[https://vercel.com/praveshika09-9263s-projects/v0-happy-capy-web-module](https://vercel.com/praveshika09-9263s-projects/v0-happy-capy-web-module)**
+## 🎯 Use Cases
 
-## Build your app
+- **Personal Wellness**: One-on-one sessions with an AI wellness coach
+- **Job Interview Practice**: Mock interviews with AI hiring panels
+- **Group Discussions**: Multi-participant conversations on various themes
+- **Social Anxiety Support**: Safe space for practicing social interactions
+- **Professional Development**: Workplace communication scenarios
 
-Continue building your app on:
+## 💡 Innovation Points
 
-**[https://v0.dev/chat/projects/1KqYRxwhABm](https://v0.dev/chat/projects/1KqYRxwhABm)**
+- **Adaptive AI Responses**: Context-aware conversations that adjust to user confidence levels
+- **Multi-Modal Interaction**: Seamless switching between text and voice interfaces
+- **Real-Time Feedback Loop**: Immediate performance metrics and improvement suggestions
+- **Scalable Architecture**: Modular design supporting easy addition of new scenarios
+- **Accessibility Focus**: WCAG-compliant interface with multiple interaction methods
 
-## How It Works
+## 🛠 Technical Architecture
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+```typescript
+Frontend: Next.js 15, TypeScript, Tailwind CSS
+State Management: React Hooks, Context API
+AI Integration: Google Gemini 1.5 Flash
+Voice Processing: WebSpeech API, Custom TTS Service
+Analytics: Real-time performance metrics engine
+Deployment: Vercel Edge Runtime
+```
+
+---
+
+HappyCapy represents a significant advancement in AI-assisted social skills development, combining cutting-edge technology with compassionate design to create a supportive environment for personal growth.
+
+[View Live Demo](#) | [Technical Documentation](#) | [Contribution Guidelines](#)
